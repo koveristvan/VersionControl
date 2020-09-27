@@ -19,6 +19,9 @@ namespace UserMaintenence
             InitializeComponent(); 
             label1.Text = Resource1.FullName;
             button1.Text = Resource1.Add;
+            button2.Text = Resource1.Write;
+            button2.Click += Button2_Click;
+
 
             listBox1.DataSource = users;
             listBox1.ValueMember = "ID";
@@ -28,8 +31,15 @@ namespace UserMaintenence
             {
                 FullName = textBox1.Text,
 
+
             };
             users.Add(u);
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sv = new SaveFileDialog();
+
         }
     }
 }
