@@ -105,9 +105,58 @@ namespace WindowsFormsApp1
                 values[counter, 8] = "";
                 counter++;
             }
-            
-            
+
+            xlSheet.get_Range(
+             GetCell(2, 1),
+             GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
+            for (int i = 0; i < counter; i++)
+            {
+                xlSheet.Cells[i + 2, 9] = string.Format("={0}*1000000/{1}", GetCell(i + 2, 8), GetCell(i + 2, 7));
+            }
+
+            //formattable
+
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 40;
+            headerRange.Interior.Color = Color.LightBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            int lastrowId = xlSheet.UsedRange.Rows.Count;
+            Excel.Range datarange = xlSheet.get_Range(GetCell(2, 1), GetCell(lastrowId, 9));
+            datarange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
+            Excel.Range firscol = xlSheet.get_Range(GetCell(2, 1), GetCell(lastrowId, 1));
+            firscol.Font.Bold = true;
+            firscol.Interior.Color = Color.LightYellow;
+
+
+            Excel.Range lastcol = xlSheet.get_Range(GetCell(2, 9), GetCell(lastrowId, 9));
+            lastcol.Interior.Color = Color.LightGreen;
+            lastcol.NumberFormat = "#,##0.00";
         }
-        
-}
+
+
+
+        private string GetCell(int x, int y)
+        {
+            string ExcelCoordinate = "";
+            int dividend = y;
+            int modulo;
+
+            while (dividend > 0)
+            {
+                modulo = (dividend - 1) % 26;
+                ExcelCoordinate = Convert.ToChar(65 + modulo).ToString() + ExcelCoordinate;
+                dividend = (int)((dividend - modulo) / 26);
+            }
+            ExcelCoordinate += x.ToString();
+
+            return ExcelCoordinate;
+        }
+
+    }
 }
