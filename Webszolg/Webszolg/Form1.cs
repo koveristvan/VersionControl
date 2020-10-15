@@ -29,8 +29,8 @@ namespace Webszolg
 
         public void getexchangerates()
         {
-            MNBArfolyamServiceSoapClient mnbservice = new MNBArfolyamServiceSoapClient();
-            GetExchangeRatesRequestBody request = new GetExchangeRatesRequestBody()
+            var mnbservice = new MNBArfolyamServiceSoapClient();
+            var request = new GetExchangeRatesRequestBody()
             {
                 currencyNames = "EUR",
                 startDate = "2020-01-01",
@@ -51,6 +51,24 @@ namespace Webszolg
             var xml = new XmlDocument();
             xml.LoadXml(rtb1.Text.ToString());
 
+            foreach (XmlElement element in xml.DocumentElement)
+            {
+                var rate = new RateData();
+                Rates.Add(rate);
+
+
+                rate.Date = DateTime.Parse(element.GetAttribute("date"));
+
+                var childelement = (XmlElement)element.ChildNodes[0];
+                rate.Currency = childelement.GetAttribute("curr");
+
+                var unit = decimal.Parse(childelement.GetAttribute("unit"));
+                var value = decimal.Parse(childelement.InnerText);
+                if (unit!=0)
+                {
+                    rate.Value = value / unit;
+                }
+            }
         }
 
            
