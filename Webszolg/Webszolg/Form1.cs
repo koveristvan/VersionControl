@@ -18,14 +18,14 @@ namespace Webszolg
     public partial class Form1 : Form
     {
         RichTextBox rtb1 = new RichTextBox();
+        RichTextBox rtb2 = new RichTextBox();
         BindingList<RateData> Rates = new BindingList<RateData>();
-        BindingList<string> Currencies = new BindingList<string>();
+        BindingList<RateData> Currencies = new BindingList<RateData>();
 
         public Form1()
         {
             InitializeComponent();
-            comboBox1.DataSource = Currencies;
-
+            getcurrencies();
             RefreshData();
             
         }
@@ -34,21 +34,34 @@ namespace Webszolg
         {
             Rates.Clear();
             dataGridView1.DataSource = Rates;
-            
+            comboBox1.DataSource = Currencies;
             getexchangerates();
             xmldata();
             addchart();
 
         }
 
+        public void getcurrencies() {
 
+            var mnbservice = new MNBArfolyamServiceSoapClient();
+            var request1 = new GetCurrencyUnitsRequestBody()
+            {
+                currencyNames = "EUR",
+            };
+
+            var response1 = mnbservice.GetCurrencyUnits(request1);
+
+            var result1 = response1.GetCurrencyUnitsResult;
+
+            rtb2.Text = result1;
+        }
 
         public void getexchangerates()
         {
             var mnbservice = new MNBArfolyamServiceSoapClient();
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = comboBox1.SelectedItem.ToString(),
+                currencyNames = "EUR",
                 startDate = dateTimePicker1.Value.ToString(),
                 endDate = dateTimePicker2.Value.ToString(),
             };
@@ -66,6 +79,7 @@ namespace Webszolg
         {
             var xml = new XmlDocument();
             xml.LoadXml(rtb1.Text.ToString());
+            
 
             foreach (XmlElement element in xml.DocumentElement)
             {
@@ -87,6 +101,8 @@ namespace Webszolg
             }
         }
 
+       
+       
         public void addchart() 
         {
             chartRateData.DataSource = Rates;
