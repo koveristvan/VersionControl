@@ -46,25 +46,45 @@ namespace Mikroszim
 
             return population;
         }
-        public List<Person> GetBirthProbabilities(string csvpath)
+        public List<BirthProbability> GetBirthProbabilities(string csvpath)
         {
-            List<Person> population = new List<Person>();
+            List<BirthProbability> birthprob = new List<BirthProbability>();
 
             using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
             {
                 while (!sr.EndOfStream)
                 {
                     var line = sr.ReadLine().Split(';');
-                    population.Add(new Person()
+                    birthprob.Add(new BirthProbability()
                     {
-                        BirthYear = int.Parse(line[0]),
-                        Gender = (Gender)Enum.Parse(typeof(Gender), line[1]),
-                        NbrOfChildren = int.Parse(line[2])
+                        Age = int.Parse(line[0]),
+                        NbrOfChildren = int.Parse(line[1]),
+                        BirthProb = double.Parse(line[2])
                     });
                 }
             }
 
-            return population;
+            return birthprob;
+        }
+        public List<DeathProbability> GetDeathProbabilities(string csvpath)
+        {
+            List<DeathProbability> deathprob = new List<DeathProbability>();
+
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Split(';');
+                    deathprob.Add(new DeathProbability()
+                    {
+                        Gender = (Gender)Enum.Parse(typeof(Gender), line[0]),
+                        Age = int.Parse(line[1]),
+                        DeathProb = double.Parse(line[2])
+                    });
+                }
+            }
+
+            return deathprob;
         }
 
 
