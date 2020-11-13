@@ -1,4 +1,5 @@
-﻿using Ajandek.Entities;
+﻿using Ajandek.Abstractions;
+using Ajandek.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace Ajandek
 {
     public partial class Form1 : Form
     {
-        private List<Ball> _balls = new List<Ball>();
+        private List<Toy> _toys = new List<Toy>();
 
         private BallFactory _factory;
         public BallFactory Factory
@@ -24,14 +25,14 @@ namespace Ajandek
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            IToyFactory = new BallFactory();
 
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
         {
-            var ball = Factory.CreateNew();
-            _balls.Add(ball);
+            var ball = IToyFactory.CreateNew();
+            _toys.Add(ball);
             ball.Left = -ball.Width;
             mainpanel.Controls.Add(ball);
         }
@@ -39,7 +40,7 @@ namespace Ajandek
         private void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var maxPosition = 0;
-            foreach (var ball in _balls)
+            foreach (var ball in _toys)
             {
                 ball.MoveBall();
                 if (ball.Left > maxPosition)
@@ -48,9 +49,9 @@ namespace Ajandek
 
             if (maxPosition > 1000)
             {
-                var oldestBall = _balls[0];
+                var oldestBall = _toys[0];
                 mainpanel.Controls.Remove(oldestBall);
-                _balls.Remove(oldestBall);
+                _toys.Remove(oldestBall);
             }
         }
     }
