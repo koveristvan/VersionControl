@@ -8,6 +8,10 @@ namespace Ajandek.Abstractions
 {
     public interface IToyFactory
     {
-        Toy CreateNew();
+        
+        
+            Toy CreateNew();
+        
+       
     }
 }
