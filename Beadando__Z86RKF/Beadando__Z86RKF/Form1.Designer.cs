@@ -101,11 +101,11 @@
             // 
             // drawingpanel
             // 
+            this.drawingpanel.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.drawingpanel.Location = new System.Drawing.Point(790, 46);
             this.drawingpanel.Name = "drawingpanel";
             this.drawingpanel.Size = new System.Drawing.Size(471, 368);
             this.drawingpanel.TabIndex = 6;
-            //this.drawingpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.paint);
             // 
             // entityCommand1
             // 
@@ -143,9 +143,9 @@
         private System.Windows.Forms.Button copymail;
         private System.Windows.Forms.BindingSource rebindingsource;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel drawingpanel;
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
+        public System.Windows.Forms.Panel drawingpanel;
     }
 }
 

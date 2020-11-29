@@ -22,6 +22,15 @@ namespace Beadando__Z86RKF
         ReaEstateEntities context = new ReaEstateEntities();
         List<Realestate> realestates;
 
+        private List<House> _houses = new List<House>();
+
+        private Housefactory _factory;
+
+        public Housefactory Factory
+        {
+            get { return _factory; }
+            set { _factory = value; }
+        }
         public Form1()
         {
             InitializeComponent();
@@ -29,8 +38,8 @@ namespace Beadando__Z86RKF
             context.Realestate.Load();
             rebindingsource.DataSource = context.Realestate.Local;
             dataGridView1.DataSource = rebindingsource;
-            
-    }
+            Factory = new Housefactory();
+        }
      
 
         public void LoadData()
@@ -145,6 +154,7 @@ namespace Beadando__Z86RKF
 
         private void drawbutton_Click(object sender, EventArgs e)
         {
+            
             using (Graphics g = drawingpanel.CreateGraphics())
             {
                 if (dataGridView1.SelectedCells.Count > 0)
@@ -157,14 +167,20 @@ namespace Beadando__Z86RKF
                     string Direction = Convert.ToString(selectedRow.Cells["DIRECTION"].Value);
                     string Pool = Convert.ToString(selectedRow.Cells["POOL"].Value);
                 }
-                drawingpanel.BackColor = Color.DeepSkyBlue;
-                g.DrawLine(new Pen(Color.Black, 3), new Point(234, 118), new Point(293, 228));
-            }
-            //Graphics g;
-            //g = CreateGraphics();
-            //Pen pen = new Pen(Color.Black);
+                //Pen mypen = new Pen(Color.Black);
 
-            //g.DrawLine(pen, 2, 2, 400, 450);
+                //    //g.DrawLine(new Pen(Color.Black, 3), new Point(234, 118), new Point(293, 228));
+                //g.DrawRectangle(mypen,100,100,100,100);
+                
+                var house = Factory.CreateNew();
+                _houses.Add(house);
+                //house.Left = 800;
+                //house.Top = 100;
+                drawingpanel.SuspendLayout();
+                drawingpanel.Controls.Add(house);
+
+            }
+            
         }
 
         
