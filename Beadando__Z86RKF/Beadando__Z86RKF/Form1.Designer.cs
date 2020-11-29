@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.drawbutton = new System.Windows.Forms.Button();
-            this.copyall = new System.Windows.Forms.Button();
-            this.copy1 = new System.Windows.Forms.Button();
+            this.saveall = new System.Windows.Forms.Button();
+            this.save1 = new System.Windows.Forms.Button();
             this.copymail = new System.Windows.Forms.Button();
             this.rebindingsource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -58,24 +58,26 @@
             this.drawbutton.TabIndex = 1;
             this.drawbutton.Text = "How it looks";
             this.drawbutton.UseVisualStyleBackColor = true;
+            this.drawbutton.Click += new System.EventHandler(this.drawbutton_Click);
             // 
-            // copyall
+            // saveall
             // 
-            this.copyall.Location = new System.Drawing.Point(611, 191);
-            this.copyall.Name = "copyall";
-            this.copyall.Size = new System.Drawing.Size(137, 45);
-            this.copyall.TabIndex = 2;
-            this.copyall.Text = "Copy all from list";
-            this.copyall.UseVisualStyleBackColor = true;
+            this.saveall.Location = new System.Drawing.Point(611, 191);
+            this.saveall.Name = "saveall";
+            this.saveall.Size = new System.Drawing.Size(137, 45);
+            this.saveall.TabIndex = 2;
+            this.saveall.Text = "Save all from list";
+            this.saveall.UseVisualStyleBackColor = true;
+            this.saveall.Click += new System.EventHandler(this.saveall_Click);
             // 
-            // copy1
+            // save1
             // 
-            this.copy1.Location = new System.Drawing.Point(611, 242);
-            this.copy1.Name = "copy1";
-            this.copy1.Size = new System.Drawing.Size(137, 56);
-            this.copy1.TabIndex = 3;
-            this.copy1.Text = "Copy selected item";
-            this.copy1.UseVisualStyleBackColor = true;
+            this.save1.Location = new System.Drawing.Point(611, 242);
+            this.save1.Name = "save1";
+            this.save1.Size = new System.Drawing.Size(137, 56);
+            this.save1.TabIndex = 3;
+            this.save1.Text = "Save selected item";
+            this.save1.UseVisualStyleBackColor = true;
             // 
             // copymail
             // 
@@ -99,11 +101,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(824, 453);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.copymail);
-            this.Controls.Add(this.copy1);
-            this.Controls.Add(this.copyall);
+            this.Controls.Add(this.save1);
+            this.Controls.Add(this.saveall);
             this.Controls.Add(this.drawbutton);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
@@ -119,8 +121,8 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button drawbutton;
-        private System.Windows.Forms.Button copyall;
-        private System.Windows.Forms.Button copy1;
+        private System.Windows.Forms.Button saveall;
+        private System.Windows.Forms.Button save1;
         private System.Windows.Forms.Button copymail;
         private System.Windows.Forms.BindingSource rebindingsource;
         private System.Windows.Forms.Label label1;
