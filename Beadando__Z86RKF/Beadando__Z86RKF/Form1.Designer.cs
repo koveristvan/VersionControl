@@ -36,6 +36,8 @@
             this.copymail = new System.Windows.Forms.Button();
             this.rebindingsource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.drawingpanel = new System.Windows.Forms.Panel();
+            this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rebindingsource)).BeginInit();
             this.SuspendLayout();
@@ -97,11 +99,28 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Real Estate List Pest county";
             // 
+            // drawingpanel
+            // 
+            this.drawingpanel.Location = new System.Drawing.Point(790, 46);
+            this.drawingpanel.Name = "drawingpanel";
+            this.drawingpanel.Size = new System.Drawing.Size(471, 368);
+            this.drawingpanel.TabIndex = 6;
+            //this.drawingpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.paint);
+            // 
+            // entityCommand1
+            // 
+            this.entityCommand1.CommandTimeout = 0;
+            this.entityCommand1.CommandTree = null;
+            this.entityCommand1.Connection = null;
+            this.entityCommand1.EnablePlanCaching = true;
+            this.entityCommand1.Transaction = null;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 453);
+            this.ClientSize = new System.Drawing.Size(1282, 472);
+            this.Controls.Add(this.drawingpanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.copymail);
             this.Controls.Add(this.save1);
@@ -118,14 +137,15 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button drawbutton;
         private System.Windows.Forms.Button saveall;
         private System.Windows.Forms.Button save1;
         private System.Windows.Forms.Button copymail;
         private System.Windows.Forms.BindingSource rebindingsource;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel drawingpanel;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
     }
 }
 

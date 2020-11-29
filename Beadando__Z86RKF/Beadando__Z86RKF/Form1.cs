@@ -30,8 +30,8 @@ namespace Beadando__Z86RKF
             rebindingsource.DataSource = context.Realestate.Local;
             dataGridView1.DataSource = rebindingsource;
             
-        }
-
+    }
+     
 
         public void LoadData()
         {
@@ -145,8 +145,29 @@ namespace Beadando__Z86RKF
 
         private void drawbutton_Click(object sender, EventArgs e)
         {
-            
+            using (Graphics g = drawingpanel.CreateGraphics())
+            {
+                if (dataGridView1.SelectedCells.Count > 0)
+                {
+                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                    string Levels = Convert.ToString(selectedRow.Cells["LEVELS"].Value);
+                    string Color = Convert.ToString(selectedRow.Cells["COLOR"].Value);
+                    string Squarem = Convert.ToString(selectedRow.Cells["SQUAREM"].Value);
+                    string Direction = Convert.ToString(selectedRow.Cells["DIRECTION"].Value);
+                    string Pool = Convert.ToString(selectedRow.Cells["POOL"].Value);
+                }
+                drawingpanel.BackColor = Color.DeepSkyBlue;
+                g.DrawLine(new Pen(Color.Black, 3), new Point(234, 118), new Point(293, 228));
+            }
+            //Graphics g;
+            //g = CreateGraphics();
+            //Pen pen = new Pen(Color.Black);
+
+            //g.DrawLine(pen, 2, 2, 400, 450);
         }
+
+        
 
 
 
