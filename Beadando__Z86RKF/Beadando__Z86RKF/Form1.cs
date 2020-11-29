@@ -21,7 +21,9 @@ namespace Beadando__Z86RKF
 
             context.Realestate.Load();
 
+            rebindingsource.DataSource = context.Realestate.Local;
 
+            dataGridView1.DataSource = rebindingsource;
         }
     }
 }
