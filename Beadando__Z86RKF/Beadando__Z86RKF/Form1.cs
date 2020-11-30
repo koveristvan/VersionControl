@@ -22,15 +22,7 @@ namespace Beadando__Z86RKF
         ReaEstateEntities context = new ReaEstateEntities();
         List<Realestate> realestates;
 
-        private List<House> _houses = new List<House>();
-
-        private Housefactory _factory;
-
-        public Housefactory Factory
-        {
-            get { return _factory; }
-            set { _factory = value; }
-        }
+      
         public Form1()
         {
             InitializeComponent();
@@ -38,7 +30,7 @@ namespace Beadando__Z86RKF
             context.Realestate.Load();
             rebindingsource.DataSource = context.Realestate.Local;
             dataGridView1.DataSource = rebindingsource;
-            Factory = new Housefactory();
+            
         }
      
 
@@ -154,30 +146,36 @@ namespace Beadando__Z86RKF
 
         private void drawbutton_Click(object sender, EventArgs e)
         {
-            
+            drawingpanel.Refresh();
             using (Graphics g = drawingpanel.CreateGraphics())
+               
             {
+                Pen mypen = new Pen(Color.Black);
                 if (dataGridView1.SelectedCells.Count > 0)
                 {
                     int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
                     DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
-                    string Levels = Convert.ToString(selectedRow.Cells["LEVELS"].Value);
+                    int Levels = int.Parse(selectedRow.Cells["LEVELS"].Value.ToString());
                     string Color = Convert.ToString(selectedRow.Cells["COLOR"].Value);
-                    string Squarem = Convert.ToString(selectedRow.Cells["SQUAREM"].Value);
+                    float Squarem = float.Parse(selectedRow.Cells["SQUAREM"].Value.ToString());
                     string Direction = Convert.ToString(selectedRow.Cells["DIRECTION"].Value);
-                    string Pool = Convert.ToString(selectedRow.Cells["POOL"].Value);
+                    bool Pool = bool.Parse(selectedRow.Cells["POOL"].Value.ToString());
+                    float multiple = 2;
+                    
+                    if (Levels==1)
+                    {
+                        g.DrawRectangle(mypen, 50, 187, Squarem*multiple, 50);
+                    }
+                    if (Levels!=1)
+                    {
+                        for (int i = 0; i < Levels; i++)
+                        {
+                            g.DrawRectangle(mypen, 50, 187-(50*i), Squarem * multiple / Levels, 50);
+                        }
+                    }
                 }
-                //Pen mypen = new Pen(Color.Black);
-
-                //    //g.DrawLine(new Pen(Color.Black, 3), new Point(234, 118), new Point(293, 228));
-                //g.DrawRectangle(mypen,100,100,100,100);
                 
-                var house = Factory.CreateNew();
-                _houses.Add(house);
-                //house.Left = 800;
-                //house.Top = 100;
-                drawingpanel.SuspendLayout();
-                drawingpanel.Controls.Add(house);
+                
 
             }
             
