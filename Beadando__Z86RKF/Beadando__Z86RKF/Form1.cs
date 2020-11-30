@@ -152,6 +152,7 @@ namespace Beadando__Z86RKF
             {
 
                 Pen mypen = new Pen(Color.Black);
+                Pen mypen2 = new Pen(Color.Black);
                 SolidBrush mybrush = new SolidBrush(Color.Black);
                 if (dataGridView1.SelectedCells.Count > 0)
                 {
@@ -188,6 +189,14 @@ namespace Beadando__Z86RKF
                     {
                         g.DrawRectangle(mypen, 50, 187, Squarem*multiple, 50);
                         g.FillRectangle(mybrush, 50+1, 187+1, Squarem * multiple-1, 50-1);
+                        if (Pool == true)
+                        {
+                            g.DrawLine(mypen2, 50 + Squarem * multiple + 20, 237, 50 + Squarem * multiple + 70, 237);
+                            g.DrawLine(mypen2, 50 + Squarem * multiple + 20, 237, 50 + Squarem * multiple + 20, 207);
+                            g.DrawLine(mypen2, 50 + Squarem * multiple + 70, 237, 50 + Squarem * multiple + 70, 207);
+                            g.DrawEllipse(mypen2, 50 + Squarem * multiple + 20, 197, 50, 20);
+                            g.FillEllipse(new SolidBrush(Color.Blue), 50 + Squarem * multiple + 20, 197, 50, 20);
+                        }
                     }
 
                     if (Levels!=1)
@@ -198,7 +207,17 @@ namespace Beadando__Z86RKF
                             g.FillRectangle(mybrush, 50+1, 187 - (50 * i) + 1, Squarem * multiple / Levels -1*Levels/multiple, 50 - 1);
 
                         }
+                        if (Pool == true)
+                        {
+                            g.DrawLine(mypen2, 50 + Squarem * multiple / Levels +20, 237, 50 + Squarem * multiple / Levels + 70, 237);
+                            g.DrawLine(mypen2, 50 + Squarem * multiple / Levels + 20, 237, 50 + Squarem * multiple / Levels + 20, 207);
+                            g.DrawLine(mypen2, 50 + Squarem * multiple / Levels + 70, 237, 50 + Squarem * multiple / Levels + 70, 207);
+                            g.DrawEllipse(mypen2, 50 + Squarem * multiple / Levels + 20, 197, 50, 20);
+                            g.FillEllipse(new SolidBrush(Color.Blue), 50 + Squarem * multiple / Levels + 20, 197, 50, 20);
+                        }
                     }
+
+                    
 
 
 

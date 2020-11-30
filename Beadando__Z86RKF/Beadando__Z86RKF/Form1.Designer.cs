@@ -101,7 +101,7 @@
             // 
             // drawingpanel
             // 
-            this.drawingpanel.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.drawingpanel.BackColor = System.Drawing.Color.Snow;
             this.drawingpanel.Location = new System.Drawing.Point(790, 46);
             this.drawingpanel.Name = "drawingpanel";
             this.drawingpanel.Size = new System.Drawing.Size(471, 368);
