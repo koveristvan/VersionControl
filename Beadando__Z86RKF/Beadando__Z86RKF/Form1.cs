@@ -185,10 +185,16 @@ namespace Beadando__Z86RKF
                             break;
                     }
 
-                    if (Levels==1)
+                    if (Levels == 1)
                     {
-                        g.DrawRectangle(mypen, 50, 187, Squarem*multiple, 50);
-                        g.FillRectangle(mybrush, 50+1, 187+1, Squarem * multiple-1, 50-1);
+                        g.DrawRectangle(mypen, 50, 187, Squarem * multiple, 50);
+                        g.FillRectangle(mybrush, 50 + 1, 187 + 1, Squarem * multiple - 1, 50 - 1);
+                        Point[] points = new Point[4];
+
+
+
+                        
+
                         if (Pool == true)
                         {
                             g.DrawLine(mypen2, 50 + Squarem * multiple + 20, 237, 50 + Squarem * multiple + 70, 237);
@@ -196,6 +202,7 @@ namespace Beadando__Z86RKF
                             g.DrawLine(mypen2, 50 + Squarem * multiple + 70, 237, 50 + Squarem * multiple + 70, 207);
                             g.DrawEllipse(mypen2, 50 + Squarem * multiple + 20, 197, 50, 20);
                             g.FillEllipse(new SolidBrush(Color.Blue), 50 + Squarem * multiple + 20, 197, 50, 20);
+                            
                         }
                     }
 
