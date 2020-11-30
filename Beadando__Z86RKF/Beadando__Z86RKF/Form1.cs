@@ -150,29 +150,58 @@ namespace Beadando__Z86RKF
             using (Graphics g = drawingpanel.CreateGraphics())
                
             {
+
                 Pen mypen = new Pen(Color.Black);
+                SolidBrush mybrush = new SolidBrush(Color.Black);
                 if (dataGridView1.SelectedCells.Count > 0)
                 {
                     int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
                     DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
                     int Levels = int.Parse(selectedRow.Cells["LEVELS"].Value.ToString());
-                    string Color = Convert.ToString(selectedRow.Cells["COLOR"].Value);
+                    string Colour = Convert.ToString(selectedRow.Cells["COLOR"].Value);
                     float Squarem = float.Parse(selectedRow.Cells["SQUAREM"].Value.ToString());
                     string Direction = Convert.ToString(selectedRow.Cells["DIRECTION"].Value);
                     bool Pool = bool.Parse(selectedRow.Cells["POOL"].Value.ToString());
                     float multiple = 2;
+
+                    switch (Colour)
+                    {
+                        case "Red":
+                            mybrush.Color = Color.Red;
+                            break;
+                        case "Blue":
+                            mybrush.Color = Color.Blue;
+                            break;
+                        case "Green":
+                            mybrush.Color = Color.Green;
+                            break;
+                        case "Yellow":
+                            mybrush.Color = Color.Yellow;
+                            break;
                     
+                        default:
+                            MessageBox.Show("Out of range !!");
+                            break;
+                    }
+
                     if (Levels==1)
                     {
                         g.DrawRectangle(mypen, 50, 187, Squarem*multiple, 50);
+                        g.FillRectangle(mybrush, 50+1, 187+1, Squarem * multiple-1, 50-1);
                     }
+
                     if (Levels!=1)
                     {
                         for (int i = 0; i < Levels; i++)
                         {
                             g.DrawRectangle(mypen, 50, 187-(50*i), Squarem * multiple / Levels, 50);
+                            g.FillRectangle(mybrush, 50+1, 187 - (50 * i) + 1, Squarem * multiple / Levels -1*Levels/multiple, 50 - 1);
+
                         }
                     }
+
+
+
                 }
                 
                 
