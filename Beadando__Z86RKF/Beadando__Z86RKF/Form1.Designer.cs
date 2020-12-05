@@ -44,9 +44,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.PoolTextBox = new System.Windows.Forms.TextBox();
+            this.DirectionTextBox = new System.Windows.Forms.TextBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rebindingsource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -72,12 +74,13 @@
             // 
             // save1
             // 
-            this.save1.Location = new System.Drawing.Point(611, 242);
+            this.save1.Location = new System.Drawing.Point(611, 307);
             this.save1.Name = "save1";
             this.save1.Size = new System.Drawing.Size(137, 56);
             this.save1.TabIndex = 3;
-            this.save1.Text = "Save selected item";
+            this.save1.Text = "Search location in chrome";
             this.save1.UseVisualStyleBackColor = true;
+            this.save1.Click += new System.EventHandler(this.save1_Click);
             // 
             // copymail
             // 
@@ -139,7 +142,7 @@
             // 
             // LevelsTextBox
             // 
-            this.LevelsTextBox.Location = new System.Drawing.Point(310, 476);
+            this.LevelsTextBox.Location = new System.Drawing.Point(301, 476);
             this.LevelsTextBox.Name = "LevelsTextBox";
             this.LevelsTextBox.Size = new System.Drawing.Size(41, 26);
             this.LevelsTextBox.TabIndex = 10;
@@ -156,7 +159,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(178, 479);
+            this.label3.Location = new System.Drawing.Point(169, 479);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(126, 20);
             this.label3.TabIndex = 12;
@@ -165,25 +168,25 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(379, 479);
+            this.label5.Location = new System.Drawing.Point(348, 479);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 20);
+            this.label5.Size = new System.Drawing.Size(72, 20);
             this.label5.TabIndex = 13;
-            this.label5.Text = "Pool";
+            this.label5.Text = "Direction";
             // 
-            // PoolTextBox
+            // DirectionTextBox
             // 
-            this.PoolTextBox.Location = new System.Drawing.Point(439, 476);
-            this.PoolTextBox.Name = "PoolTextBox";
-            this.PoolTextBox.Size = new System.Drawing.Size(71, 26);
-            this.PoolTextBox.TabIndex = 14;
+            this.DirectionTextBox.Location = new System.Drawing.Point(426, 476);
+            this.DirectionTextBox.Name = "DirectionTextBox";
+            this.DirectionTextBox.Size = new System.Drawing.Size(142, 26);
+            this.DirectionTextBox.TabIndex = 14;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1282, 545);
-            this.Controls.Add(this.PoolTextBox);
+            this.Controls.Add(this.DirectionTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
@@ -201,6 +204,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rebindingsource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,7 +226,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox PoolTextBox;
+        private System.Windows.Forms.TextBox DirectionTextBox;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

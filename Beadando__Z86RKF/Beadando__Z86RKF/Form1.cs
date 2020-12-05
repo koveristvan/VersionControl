@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Beadando__Z86RKF
 {
@@ -170,8 +171,10 @@ namespace Beadando__Z86RKF
                 if (dataGridView1.SelectedCells.Count > 0)
                 {
                     //változók beolvasása a datagridviewból
+                    
                     int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
                     DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                    string Location = selectedRow.Cells["LOCATION"].Value.ToString();
                     int Levels = int.Parse(selectedRow.Cells["LEVELS"].Value.ToString());
                     string Colour = Convert.ToString(selectedRow.Cells["COLOR"].Value);
                     float Squarem = float.Parse(selectedRow.Cells["SQUAREM"].Value.ToString());
@@ -179,6 +182,13 @@ namespace Beadando__Z86RKF
                     bool Pool = bool.Parse(selectedRow.Cells["POOL"].Value.ToString());
                     float multiple = 2;
                     int width = int.Parse((Squarem * multiple).ToString());
+
+                    LocationTextbox.Text = Location;
+                    SquareTextBox.Text = Squarem.ToString();
+                    DirectionTextBox.Text = Direction;
+                    LevelsTextBox.Text = Levels.ToString();
+
+                    
 
                     // házszín
                     switch (Colour)
@@ -262,22 +272,15 @@ namespace Beadando__Z86RKF
             }
         }
 
+        private void save1_Click(object sender, EventArgs e)
+        {
+            
+            string URL=LocationTextbox.Text;
+            
+            Process.Start("https://www.google.be/search?q=" + URL);
+        }
 
 
-
-
-
-        //public void save1_Click(object sender, EventArgs e)
-        //{
-        //    if (dataGridView1.CurrentRow.Index >= 0)
-        //    {
-        //        DataGridViewRow row = dataGridView1.Rows[dataGridView1.CurrentRow.Index];
-        //        txtID.Text = row.Cells[0].Value.ToString();
-        //        txtName.Text = row.Cells[1].Value.ToString();
-        //        txtCountry.Text = row.Cells[2].Value.ToString();
-        //    }
-
-        //}
 
     }
 }
