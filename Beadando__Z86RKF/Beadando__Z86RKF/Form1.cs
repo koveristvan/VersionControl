@@ -142,23 +142,34 @@ namespace Beadando__Z86RKF
                          GetCell(2, 1),
                          GetCell(1 + values.GetLength(0), values.GetLength(1))).Value2 = values;
 
+            
+            Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
+            headerRange.Font.Bold = true;
+            headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            headerRange.EntireColumn.AutoFit();
+            headerRange.RowHeight = 50;
+            headerRange.Interior.Color = Color.DeepSkyBlue;
+            headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
         }
 
 
 
-        private void drawbutton_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             drawingpanel.Refresh();
             using (Graphics g = drawingpanel.CreateGraphics())
-               
+
             {
 
                 Pen mypen = new Pen(Color.Black);
                 Pen mypen2 = new Pen(Color.Black);
                 SolidBrush mybrush = new SolidBrush(Color.Black);
                 SolidBrush mybrush2 = new SolidBrush(Color.Brown);
+                SolidBrush windowbrush = new SolidBrush(Color.DarkGray);
                 if (dataGridView1.SelectedCells.Count > 0)
                 {
+                    //változók beolvasása a datagridviewból
                     int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
                     DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
                     int Levels = int.Parse(selectedRow.Cells["LEVELS"].Value.ToString());
@@ -167,7 +178,9 @@ namespace Beadando__Z86RKF
                     string Direction = Convert.ToString(selectedRow.Cells["DIRECTION"].Value);
                     bool Pool = bool.Parse(selectedRow.Cells["POOL"].Value.ToString());
                     float multiple = 2;
+                    int width = int.Parse((Squarem * multiple).ToString());
 
+                    // házszín
                     switch (Colour)
                     {
                         case "Red":
@@ -182,69 +195,72 @@ namespace Beadando__Z86RKF
                         case "Yellow":
                             mybrush.Color = Color.Yellow;
                             break;
-                    
+
                         default:
-                            MessageBox.Show("Out of range !!");
+                            mybrush.Color = Color.White;
+                            MessageBox.Show("A ház igazi színe nincs a rendszerben");
                             break;
                     }
-
+                    //egyszintes ház
                     if (Levels == 1)
                     {
-                        g.DrawRectangle(mypen, 50, 187, Squarem * multiple, 50);
-                        g.FillRectangle(mybrush, 50 + 1, 187 + 1, Squarem * multiple - 1, 50 - 1);
-                        
-                        Point point1 = new Point(50,187);
-                        Point point2 = new Point(int.Parse(((50+(Squarem * multiple)/2)).ToString()), 150);
-                        Point point3 = new Point(int.Parse((50+(Squarem * multiple)).ToString()), 187);
-                        Point[] trianglepoints = { point1,point2, point3 };
-                        g.FillPolygon(mybrush2, trianglepoints);
+                        g.DrawRectangle(mypen, 50, 187, width, 50);
+                        g.FillRectangle(mybrush, 50 + 1, 187 + 1, width - 1, 50 - 1);
 
-                        
+                        Point point1 = new Point(50, 187);
+                        Point point2 = new Point((50 + (width) / 2), 150);
+                        Point point3 = new Point(50 + width, 187);
+                        Point[] trianglepoints = { point1, point2, point3 };
+                        g.FillPolygon(mybrush2, trianglepoints); //tető
+                        g.FillRectangle(windowbrush, 70, 200, 20, 20);
 
-                        if (Pool == true)
-                        {
-                            g.DrawLine(mypen2, 50 + Squarem * multiple + 20, 237, 50 + Squarem * multiple + 70, 237);
-                            g.DrawLine(mypen2, 50 + Squarem * multiple + 20, 237, 50 + Squarem * multiple + 20, 207);
-                            g.DrawLine(mypen2, 50 + Squarem * multiple + 70, 237, 50 + Squarem * multiple + 70, 207);
-                            g.DrawEllipse(mypen2, 50 + Squarem * multiple + 20, 197, 50, 20);
-                            g.FillEllipse(new SolidBrush(Color.Blue), 50 + Squarem * multiple + 20, 197, 50, 20);
-                            
-                        }
                     }
-
-                    if (Levels!=1)
+                    //többszintes ház
+                    if (Levels != 1)
                     {
                         for (int i = 0; i < Levels; i++)
                         {
-                            g.DrawRectangle(mypen, 50, 187-(50*i), Squarem * multiple / Levels, 50);
-                            g.FillRectangle(mybrush, 50+1, 187 - (50 * i) + 1, Squarem * multiple / Levels -1*Levels/multiple, 50 - 1);
-                            
-                        }
-                        if (Pool == true)
-                        {
-                            g.DrawLine(mypen2, 50 + Squarem * multiple / Levels +20, 237, 50 + Squarem * multiple / Levels + 70, 237);
-                            g.DrawLine(mypen2, 50 + Squarem * multiple / Levels + 20, 237, 50 + Squarem * multiple / Levels + 20, 207);
-                            g.DrawLine(mypen2, 50 + Squarem * multiple / Levels + 70, 237, 50 + Squarem * multiple / Levels + 70, 207);
-                            g.DrawEllipse(mypen2, 50 + Squarem * multiple / Levels + 20, 197, 50, 20);
-                            g.FillEllipse(new SolidBrush(Color.Blue), 50 + Squarem * multiple / Levels + 20, 197, 50, 20);
+                            g.DrawRectangle(mypen, 50, 187 - (50 * i), width / Levels, 50);
+                            g.FillRectangle(mybrush, 50 + 1, 187 - (50 * i) + 1, width / Levels - 1 * Levels / multiple, 50 - 1);
+                            if (Squarem / Levels > 50)
+                            {
+                                g.FillRectangle(windowbrush, 70, 200 - (i * 50), 20, 20);
+                            }
+
+                            if (i > 0 & Squarem > 100)
+                            {
+                                g.FillRectangle(windowbrush, width / Levels + 10, 200 - (i * 50), 20, 20);
+                            }
                         }
 
                     }
-
-                    
-
-
+                    //medence
+                    if (Pool == true)
+                    {
+                        g.DrawLine(mypen2, 50 + width / Levels + 20, 237, 50 + width / Levels + 70, 237);
+                        g.DrawLine(mypen2, 50 + width / Levels + 20, 237, 50 + width / Levels + 20, 207);
+                        g.DrawLine(mypen2, 50 + width / Levels + 70, 237, 50 + width / Levels + 70, 207);
+                        g.DrawEllipse(mypen2, 50 + width / Levels + 20, 197, 50, 20);
+                        g.FillEllipse(new SolidBrush(Color.Blue), 50 + width / Levels + 20, 197, 50, 20);
+                    }
+                    g.FillRectangle(mybrush2, width / Levels, 200, 20, 37); //ajtó
 
                 }
-                
-                
 
             }
-            
         }
 
-        
+        private void copymail_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                string mail = selectedRow.Cells["EMAIL"].Value.ToString();
 
+                Clipboard.SetText(mail);
+            }
+        }
 
 
 
