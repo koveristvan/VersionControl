@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.saveall = new System.Windows.Forms.Button();
-            this.save1 = new System.Windows.Forms.Button();
+            this.searchbutton = new System.Windows.Forms.Button();
             this.copymail = new System.Windows.Forms.Button();
             this.rebindingsource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
@@ -46,6 +46,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.DirectionTextBox = new System.Windows.Forms.TextBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.search_textbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rebindingsource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -64,7 +66,7 @@
             // 
             // saveall
             // 
-            this.saveall.Location = new System.Drawing.Point(611, 180);
+            this.saveall.Location = new System.Drawing.Point(611, 245);
             this.saveall.Name = "saveall";
             this.saveall.Size = new System.Drawing.Size(137, 56);
             this.saveall.TabIndex = 2;
@@ -72,15 +74,15 @@
             this.saveall.UseVisualStyleBackColor = true;
             this.saveall.Click += new System.EventHandler(this.saveall_Click);
             // 
-            // save1
+            // searchbutton
             // 
-            this.save1.Location = new System.Drawing.Point(611, 307);
-            this.save1.Name = "save1";
-            this.save1.Size = new System.Drawing.Size(137, 56);
-            this.save1.TabIndex = 3;
-            this.save1.Text = "Search location in chrome";
-            this.save1.UseVisualStyleBackColor = true;
-            this.save1.Click += new System.EventHandler(this.save1_Click);
+            this.searchbutton.Location = new System.Drawing.Point(611, 307);
+            this.searchbutton.Name = "searchbutton";
+            this.searchbutton.Size = new System.Drawing.Size(137, 56);
+            this.searchbutton.TabIndex = 3;
+            this.searchbutton.Text = "Search location in chrome";
+            this.searchbutton.UseVisualStyleBackColor = true;
+            this.searchbutton.Click += new System.EventHandler(this.searchbutton_Click_1);
             // 
             // copymail
             // 
@@ -181,11 +183,29 @@
             this.DirectionTextBox.Size = new System.Drawing.Size(142, 26);
             this.DirectionTextBox.TabIndex = 14;
             // 
+            // search_textbox
+            // 
+            this.search_textbox.Location = new System.Drawing.Point(1120, 463);
+            this.search_textbox.Name = "search_textbox";
+            this.search_textbox.Size = new System.Drawing.Size(141, 26);
+            this.search_textbox.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(800, 463);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(204, 20);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Number of google searches";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1282, 545);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.search_textbox);
             this.Controls.Add(this.DirectionTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -197,7 +217,7 @@
             this.Controls.Add(this.drawingpanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.copymail);
-            this.Controls.Add(this.save1);
+            this.Controls.Add(this.searchbutton);
             this.Controls.Add(this.saveall);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
@@ -212,7 +232,7 @@
 
         #endregion
         private System.Windows.Forms.Button saveall;
-        private System.Windows.Forms.Button save1;
+        private System.Windows.Forms.Button searchbutton;
         private System.Windows.Forms.Button copymail;
         private System.Windows.Forms.BindingSource rebindingsource;
         private System.Windows.Forms.Label label1;
@@ -228,6 +248,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox DirectionTextBox;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.TextBox search_textbox;
+        private System.Windows.Forms.Label label6;
     }
 }
 

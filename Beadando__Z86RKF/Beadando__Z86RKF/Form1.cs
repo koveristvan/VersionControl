@@ -23,7 +23,10 @@ namespace Beadando__Z86RKF
         ReaEstateEntities context = new ReaEstateEntities();
         List<Realestate> realestates;
 
-      
+        
+       
+       
+
         public Form1()
         {
             InitializeComponent();
@@ -31,9 +34,10 @@ namespace Beadando__Z86RKF
             context.Realestate.Load();
             rebindingsource.DataSource = context.Realestate.Local;
             dataGridView1.DataSource = rebindingsource;
+            Value = 0;
             
-        }
-     
+    }
+        
 
         public void LoadData()
         {
@@ -156,11 +160,23 @@ namespace Beadando__Z86RKF
 
 
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        public void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+            string Location = selectedRow.Cells["LOCATION"].Value.ToString();
+            int Levels = int.Parse(selectedRow.Cells["LEVELS"].Value.ToString());
+            string Colour = Convert.ToString(selectedRow.Cells["COLOR"].Value);
+            float Squarem = float.Parse(selectedRow.Cells["SQUAREM"].Value.ToString());
+            string Direction = Convert.ToString(selectedRow.Cells["DIRECTION"].Value);
+            bool Pool = bool.Parse(selectedRow.Cells["POOL"].Value.ToString());
+            float multiple = 2;
+            int width = int.Parse((Squarem * multiple).ToString());
+
+            
             drawingpanel.Refresh();
             using (Graphics g = drawingpanel.CreateGraphics())
-
             {
 
                 Pen mypen = new Pen(Color.Black);
@@ -171,24 +187,12 @@ namespace Beadando__Z86RKF
                 if (dataGridView1.SelectedCells.Count > 0)
                 {
                     //változók beolvasása a datagridviewból
-                    
-                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
-                    string Location = selectedRow.Cells["LOCATION"].Value.ToString();
-                    int Levels = int.Parse(selectedRow.Cells["LEVELS"].Value.ToString());
-                    string Colour = Convert.ToString(selectedRow.Cells["COLOR"].Value);
-                    float Squarem = float.Parse(selectedRow.Cells["SQUAREM"].Value.ToString());
-                    string Direction = Convert.ToString(selectedRow.Cells["DIRECTION"].Value);
-                    bool Pool = bool.Parse(selectedRow.Cells["POOL"].Value.ToString());
-                    float multiple = 2;
-                    int width = int.Parse((Squarem * multiple).ToString());
+
 
                     LocationTextbox.Text = Location;
                     SquareTextBox.Text = Squarem.ToString();
                     DirectionTextBox.Text = Direction;
                     LevelsTextBox.Text = Levels.ToString();
-
-                    
 
                     // házszín
                     switch (Colour)
@@ -255,32 +259,64 @@ namespace Beadando__Z86RKF
                     }
                     g.FillRectangle(mybrush2, width / Levels, 200, 20, 37); //ajtó
 
+
                 }
 
             }
+
         }
+
+
 
         private void copymail_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedCells.Count > 0)
             {
-                int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
-                string mail = selectedRow.Cells["EMAIL"].Value.ToString();
+                
+                    int selectedrowindex = dataGridView1.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = dataGridView1.Rows[selectedrowindex];
+                    string mail = selectedRow.Cells["EMAIL"].Value.ToString();
 
-                Clipboard.SetText(mail);
+                    Clipboard.SetText(mail);
+               
+                
+            }
+            
+        }
+
+
+        private int _value;
+
+        public int Value
+        {
+            get { return _value; }
+            set
+            {
+                _value = value;
+
+            }
+        }
+        private void searchbutton_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                if (Value < 5)
+                {
+
+                    string URL = LocationTextbox.Text;
+
+                    Process.Start("https://www.google.be/search?q=" + URL);
+
+                    Value++;
+                    search_textbox.Text = Value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("You are using the search function too much");
+                }
             }
         }
 
-        private void save1_Click(object sender, EventArgs e)
-        {
-            
-            string URL=LocationTextbox.Text;
-            
-            Process.Start("https://www.google.be/search?q=" + URL);
-        }
-
-
-
+       
     }
 }
